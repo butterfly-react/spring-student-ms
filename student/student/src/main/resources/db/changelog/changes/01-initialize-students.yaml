@@ -1,0 +1,54 @@
+databaseChangeLog:
+  - changeSet:
+      id: 00-create-hibernate-sequence
+      author: Zoltan Molnar
+      changes:
+        - createSequence:
+            sequenceName: hibernate_sequence
+            startValue: 1
+            incrementBy: 1
+  - changeSet:
+      id: 01-create-student-table
+      author: Zoltan Molnar
+      changes:
+        - createSequence:
+            sequenceName: student_id_seq
+        - createTable:
+            tableName: student
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 02-insert-students
+      author: Zoltan Molnar
+      changes:
+        - insert:
+            tableName: student
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  valueComputed: nextval('student_id_seq')
+              - column:
+                  name: name
+                  type: string
+                  value: "Valaki Elek"
+              - column:
+                  name: email
+                  type: string
+                  value: "elek@email.com"
