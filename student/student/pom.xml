@@ -95,7 +95,6 @@
 		</dependencies>
 	</dependencyManagement>
 
-
 	<build>
 		<plugins>
 			<plugin>
@@ -122,6 +121,5 @@
 			</snapshots>
 		</repository>
 	</repositories>
-
 
 </project>

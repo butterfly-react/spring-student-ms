@@ -33,8 +33,6 @@ public class StudentController {
 
     @GetMapping("/{id}")
     public ResponseEntity<StudentResponse> getById(@PathVariable int id) {
-
-        System.out.println("here");
         StudentResponse entity = studentService.getById(id);
         if (entity != null) {
             return new ResponseEntity<>(entity, HttpStatus.OK);
@@ -44,22 +42,22 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> create(@Valid @RequestBody Student someEntity, BindingResult bindingResult) {
+    public ResponseEntity<Void> create(@Valid @RequestBody Student student, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        studentService.create(someEntity);
+        studentService.create(student);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@PathVariable int id, @Valid @RequestBody Student someEntity, BindingResult bindingResult) {
+    public ResponseEntity<Void> update(@PathVariable int id, @Valid @RequestBody Student student, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        boolean updated = studentService.update(id, someEntity);
+        boolean updated = studentService.update(id, student);
         if (updated) {
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
